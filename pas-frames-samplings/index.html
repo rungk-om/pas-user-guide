@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>PAS frames & samplings - PAS L2 Data User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PAS frames \u0026 samplings";
+        var mkdocs_page_input_path = "pas-frames-samplings.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PAS L2 Data User Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pas-measurements/">PAS measurements</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">PAS frames & samplings</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#frames-and-bins-location">Frames and bins location</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#transformation-between-solar-orbiter-and-pas-frames">Transformation between Solar Orbiter and PAS frames</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pas-sampling-organization">PAS sampling organization</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PAS L2 Data User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>PAS frames & samplings</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pas-frames-and-spatial-samplings">PAS frames and spatial samplings</h1>
+<h2 id="frames-and-bins-location">Frames and bins location</h2>
+<p>Figure 1 shows a simplified diagram of a side-cut of PAS, showing the <strong>Elevation</strong> and <strong>Azimuth</strong> angles. Table 1 summarizes the angle coverage, total bin number, and bin labels from the diagram.</p>
+<p><em>Table 1 Summary of spatial sampling coverage</em> </p>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Angle coverage</th>
+<th>Total bin number</th>
+<th>Bin labels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elevation</td>
+<td>[-22.5, 22.5]<span class="arithmatex"><span class="MathJax_Preview">^{o}</span><script type="math/tex">^{o}</script></span></td>
+<td>9</td>
+<td>El.0 to El.9</td>
+</tr>
+<tr>
+<td>Azimuth</td>
+<td>[-24, 42]<span class="arithmatex"><span class="MathJax_Preview">^{o}</span><script type="math/tex">^{o}</script></span></td>
+<td>11</td>
+<td>CEM 0 to CEM 10</td>
+</tr>
+</tbody>
+</table>
+<p>In the diagram, the angle coverage does not include the periphery. </p>
+<p><img alt="Elevation and azimuth bins and angles in the PAS analyzer frame" src="../img/pas-elevation-azimuth-side_cut.png" />
+<em>Figure 1 Elevation and azimuth bins and angles in the PAS analyzer frame. The CEMs plane is shown from the Analyzer.</em></p>
+<p>Additionally, PAS is capable of varying the voltage in order to detect ions in energy range as shown in Table 2.</p>
+<p><em>Table 2 Summary of the energy coverage and bins</em></p>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Energy coverage</th>
+<th>Total bin number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Energy</td>
+<td>[200, 20000] eV</td>
+<td>96</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transformation-between-solar-orbiter-and-pas-frames">Transformation between Solar Orbiter and PAS frames</h3>
+<p>Figure 2 shows the same in the SRF (noted as SC in Figure and equations below). Note that the solar orbiter frame corresponds to the RTN Heliocentric frame most of the time with </p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\begin{align}
+X_{RTN} &amp; = -X_{SC},\\
+Y_{RTN} &amp; =-Y_{SC}.
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+X_{RTN} & = -X_{SC},\\
+Y_{RTN} & =-Y_{SC}.
+\end{align}</script>
+</div>
+<p><img alt="Elevation and azimuth bins in the Solar Orbiter frame" src="../img/pas_elevation_sc_frame.png" />
+<em>Figure 2 Elevation and azimuth bins in the Solar Orbiter frame.</em></p>
+<p>Thus the ion velocity unit vector corresponding to the given bin is calculated as follows:
+For the PAS frame:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\begin{align}
+V_X^{PAS} &amp; = - \cos(El) \cdot \cos (Az),\\
+V_Y^{PAS} &amp; = - \cos(El) \cdot \sin (Az),\\
+V_Z^{PAS} &amp; = \sin(El).
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+V_X^{PAS} & = - \cos(El) \cdot \cos (Az),\\
+V_Y^{PAS} & = - \cos(El) \cdot \sin (Az),\\
+V_Z^{PAS} & = \sin(El).
+\end{align}</script>
+</div>
+<p>For the Solar Orbiter (SRF) frame:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\begin{align}
+V_X^{SRF} &amp; = - \cos(El) \cdot \cos (Az),\\
+V_Y^{SRF} &amp; = \cos(El) \cdot \sin (Az),\\
+V_Z^{SRF} &amp; = - \sin(El).
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+V_X^{SRF} & = - \cos(El) \cdot \cos (Az),\\
+V_Y^{SRF} & = \cos(El) \cdot \sin (Az),\\
+V_Z^{SRF} & = - \sin(El).
+\end{align}</script>
+</div>
+<h2 id="pas-sampling-organization">PAS sampling organization</h2>
+<p>PAS performs the energy-elevation sweep as shown in Figure 3. PAS keeps the constant energy while sweeping through the elevations. During the sweeping along one elevation bin, PAS accumulates counts in all 11 azimuth bins simultaneously. As soon as the energy-elevation sweep is completed the resulting data set (so-called “sampling”) is a matrix of [11
+azimuth, 9 elevations, 96 energies]. Because in most of the cases the real sweep does not cover the full energy-elevation range (it may be like [11 azimuths, 3:7 elevations, 10:73 energies]), we provide also the supporting information about the start/number of the energy and the elevation bins. Since a “peak tracking” runs permanently, the position of the
+energy x elevation window inside the 9 x 96 frame can change at any time.</p>
+<p><img alt="PAS measurements scheme" src="../img/measurements-scheme.png" />
+<em>Figure 3 PAS measurements scheme</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../pas-measurements/" class="btn btn-neutral float-left" title="PAS measurements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../pas-measurements/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../mathjax-config.js" defer></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
