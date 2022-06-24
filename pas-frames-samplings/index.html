@@ -185,6 +185,9 @@ azimuth, 9 elevations, 96 energies]. Because in most of the cases the real sweep
 energy x elevation window inside the 9 x 96 frame can change at any time.</p>
 <p><img alt="PAS measurements scheme" src="../img/measurements-scheme.png" />
 <em>Figure 3 PAS measurements scheme</em></p>
+<p>Normally the PAS cyclogram is looking as shown in Figure 4. PAS produces one sampling per 4 s. Every 100 s, PAS tries to adapt the energy/elevation window to the solar wind velocity vector. Each 300s, PAS performs fast measurements called “SnapShot”. Here PAS provides “K” number of samplings per second without any gaps. This short cadence takes 9 s. The long fast measurements, called “Burst Mode” is performed by the ground TC. The duration of the “Burst Mode” is 300s.</p>
+<p><img alt="PAS Normal mode implementation" src="../img/normal-mode-implementation.png" />
+<em>Figure 4 PAS Normal mode implementation</em></p>
               
             </div>
           </div><footer>
