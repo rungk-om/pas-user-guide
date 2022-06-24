@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>About - PAS L2 Data User Guide</title>
+    <title>VDF interpretation - PAS L2 Data User Guide</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "About";
-        var mkdocs_page_input_path = "about.md";
+        var mkdocs_page_name = "VDF interpretation";
+        var mkdocs_page_input_path = "special-notes-vdf.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -44,14 +44,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">About</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#document-scope">Document scope</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
                 </li>
               </ul>
               <ul>
@@ -70,8 +64,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../known-caveats/">Known caveats</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../special-notes-vdf/">VDF interpretation</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">VDF interpretation</a>
+    <ul class="current">
+    </ul>
                 </li>
               </ul>
       </div>
@@ -87,7 +83,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>About</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>VDF interpretation</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -97,20 +93,78 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="about">About</h1>
-<h2 id="document-scope">Document scope</h2>
-<p>This document contains a short description of the Solar Orbiter SWA-PAS sensor and the measurement implementation, a short description of the L2 data and data frames, and a description of how to interpret the velocity distribution function (VDF), and the known data caveats.</p>
-<h2 id="authors">Authors</h2>
-<p>Andrei Fedorov (andrei.fedorov@irap.omp.eu) 
-Version V02 11/16/2020 </p>
-<p>Rungployphan Kieokaew (rkieokaew@irap.omp.eu) 
-Last update: 15/06/2022 </p>
+                <h1 id="special-notes-about-pas-vdf-interpretation">Special notes about PAS VDF interpretation</h1>
+<p>PAS VDF data product are described in Section 5.1. Each corresponding CDF file (see Table 1) contains four supporting variables:</p>
+<ol>
+<li>Full Elevation [ 11, 9, 3] = [Azimuthal bins, Elevation bins, [elArrMin,Center,elArrMax]]</li>
+<li>Full Azimuth [ 11, 9, 3] = [Azimuthal bins, Elevation bins, [azArrMin,Center,azArrMaxMax]]</li>
+<li>Elevation_correction [96] = [Energy bins]</li>
+<li>Energy [96] = [Energy bins]</li>
+<li>delta_p_Energy[96] = [Energy bins]</li>
+<li>delta_m_Energy[96] = [Energy bins]</li>
+</ol>
+<p>These four tables define position of of each bin as follows</p>
+<ul>
+<li>
+<p><strong>ie</strong> : bin energy index [0 - 95]</p>
+</li>
+<li>
+<p><strong>iel</strong> : bin elevation index [0 - 8]</p>
+</li>
+<li>
+<p><strong>iaz</strong> : bin azimuth index [0 - 10]</p>
+</li>
+</ul>
+<p><em>All angles are in rads</em></p>
+<ul>
+<li>
+<p><strong>se</strong> = start_energy index</p>
+</li>
+<li>
+<p><strong>sel</strong> = start_elevation index</p>
+</li>
+<li>
+<p>E2V = 13.85</p>
+</li>
+</ul>
+<p>Given above information, we can find the limit of sampling velocity</p>
+<pre><code>vMin[ie] = E2V * sqrt(Energy[ie]-delta_m_Energy) #[km/s]
+vMax[ie] = E2V * sqrt(Energy[ie]+delta_p_Energy) #[km/s]
+</code></pre>
+<p>The coordinates of each bin can be found as</p>
+<pre><code>x0 = -cos(elArrMin[iaz,iel])*cos(azArrMin[iaz,iel])
+x1 = -cos(elArrMin[iaz,iel])*cos(azArrMax[iaz,iel])
+x2 = -cos(elArrMax[iaz,iel])*cos(azArrMin[iaz,iel])
+x3 = -cos(elArrMax[iaz,iel])*cos(azArrMax[iaz,iel])
+
+y0 = cos(elArrMin[iaz,iel])*sin(azArrMin[iaz,iel])
+y1 = cos(elArrMin[iaz,iel])*sin(azArrMax[iaz,iel])
+y2 = cos(elArrMax[iaz,iel])*sin(azArrMin[iaz,iel])
+y3 = cos(elArrMax[iaz,iel])*sin(azArrMax[iaz,iel])
+
+z0 = -sin(elArrMin[iaz,iel])
+z1 = -sin(elArrMin[iaz,iel])
+z2 = -sin(elArrMax[iaz,iel])
+z3 = -sin(elArrMax[iaz,iel])
+
+if(((ie - se) % 2) == 0) z0,z1,z2,z3 += Elevation_correction[ie]
+else z0,z1,z2,z3 -= Elevation_correction[ie]
+</code></pre>
+<p>The position of each grid is then</p>
+<pre><code>Pi = [Xi,Yi,Zi]
+</code></pre>
+<p>where <span class="arithmatex"><span class="MathJax_Preview">i = 0, 1, 2, 3</span><script type="math/tex">i = 0, 1, 2, 3</script></span>.</p>
+<p>Now the cell points coordinates are defined according to Figure 5.</p>
+<p><img alt="PAS special bins" src="../img/bin-definition.png" />
+<em>Figure 5 Definition of one bin in the velocity space in SRF frame</em></p>
+<p>Figure 6 show the results of the integration of one hour averaged VDF along Vy and Vz. The <strong>Elevation correction</strong> gives the <em>saw-like</em> boundaries between bins in Vx-Vz plane. Also, in the plane Vx-Vy you can see that the VDFs value are perturbed for the velocities below 280 km/s.</p>
+<p><img alt="VDF plot example" src="../img/vdf-plots.png" />
+<em>Figure 6: One hour averaged VDF projected into Vx-Vy[SRF] and Vx-Vz[SRF] panes. For convenience the Sun is on the left and the Vx is positive.</em></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../pas-measurements/" class="btn btn-neutral float-right" title="PAS measurements">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../known-caveats/" class="btn btn-neutral float-left" title="Known caveats"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -133,10 +187,8 @@ Last update: 15/06/2022 </p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../known-caveats/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../pas-measurements/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

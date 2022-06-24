@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>About - PAS L2 Data User Guide</title>
+    <title>Known caveats - PAS L2 Data User Guide</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "About";
-        var mkdocs_page_input_path = "about.md";
+        var mkdocs_page_name = "Known caveats";
+        var mkdocs_page_input_path = "known-caveats.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -44,14 +44,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">About</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#document-scope">Document scope</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
                 </li>
               </ul>
               <ul>
@@ -66,8 +60,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../pas-samplings-organisation/">PAS sampling organisation</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../known-caveats/">Known caveats</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Known caveats</a>
+    <ul class="current">
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -87,7 +83,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>About</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Known caveats</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -97,20 +93,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="about">About</h1>
-<h2 id="document-scope">Document scope</h2>
-<p>This document contains a short description of the Solar Orbiter SWA-PAS sensor and the measurement implementation, a short description of the L2 data and data frames, and a description of how to interpret the velocity distribution function (VDF), and the known data caveats.</p>
-<h2 id="authors">Authors</h2>
-<p>Andrei Fedorov (andrei.fedorov@irap.omp.eu) 
-Version V02 11/16/2020 </p>
-<p>Rungployphan Kieokaew (rkieokaew@irap.omp.eu) 
-Last update: 15/06/2022 </p>
+                <h1 id="caveats">Caveats</h1>
+<p>For the moment (16th Oct 2020) the PAS L2 data caveats are as follows:</p>
+<ol>
+<li>
+<p>3D velocity distribution function and 1D differential energy flux could be a little bit unstable inside the energy range [300 - 400] eV. The geometrical factor of the instrument is decreasing for these energies and a statistical count noise can cause perturbed VDF values.</p>
+</li>
+<li>
+<p>3D velocity distribution function and 1D differential energy flux could be irrelevant for the energies below 300 eV. The geometrical factor of the instrument is very small here and it cannot be determined with sufficient accuracy.</p>
+</li>
+<li>
+<p>A sporadic very low “ghost values” can appear in the extreme Elevation and Azimuthal angles in VDF (see Figure 6).</p>
+</li>
+<li>
+<p>Ground calculated density and pressure tensor could be a little bit perturbed inside the solar wind velocity range [260 - 380] km/s.</p>
+</li>
+<li>
+<p>Ground calculated density and pressure tensor are irrelevant for the solar wind velocity below 260 km/s.</p>
+</li>
+</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../pas-measurements/" class="btn btn-neutral float-right" title="PAS measurements">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../pas-samplings-organisation/" class="btn btn-neutral float-left" title="PAS sampling organisation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../special-notes-vdf/" class="btn btn-neutral float-right" title="VDF interpretation">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -133,10 +140,10 @@ Last update: 15/06/2022 </p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../pas-samplings-organisation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../pas-measurements/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../special-notes-vdf/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
