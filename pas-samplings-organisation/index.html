@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>PAS measurements - PAS L2 Data User Guide</title>
+    <title>PAS sampling organisation - PAS L2 Data User Guide</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "PAS measurements";
-        var mkdocs_page_input_path = "pas-measurements.md";
+        var mkdocs_page_name = "PAS sampling organisation";
+        var mkdocs_page_input_path = "pas-samplings-organisation.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -48,26 +48,20 @@
                 <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">PAS measurements</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#design">Design</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#resolution-and-coverage">Resolution and coverage</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#reduced-resolution-and-coverage-for-burst-mode">Reduced resolution and coverage for burst mode</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#different-settings-for-normal-mode-and-burst-mode">Different settings for normal mode and burst mode</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pas-measurements/">PAS measurements</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../pas-frames-samplings/">PAS frames & samplings</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../pas-samplings-organisation/">PAS sampling organisation</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">PAS sampling organisation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#pas-operation-cyclogram">PAS operation cyclogram</a>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -83,7 +77,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>PAS measurements</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>PAS sampling organisation</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -93,21 +87,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="pas-measurements">PAS measurements</h1>
-<h3 id="design">Design</h3>
-<p>PAS is designed to continuously determine the 3D distribution functions of the dominant ions of the solar wind, from 200 eV to 20 KeV, without mass and charge selection. In practice, this concerns mostly the proton and alpha populations. These measurements are used to calculate the density, speed, pressure, and temperature tensors of the main component of the solar wind.</p>
-<h3 id="resolution-and-coverage">Resolution and coverage</h3>
-<p>At full resolution, PAS measures the 3D ion distribution function, in the form of arrays of 96 energies, 11 azimuth angles, and 9 elevation angles, in about ~1 second. The energy and the angle of elevation are selected by imposing different high voltages on the electrodes of the deflection system and the electrostatic analyzer. The 11 azimuthal angles correspond to the 11 detectors of the instrument (called "channeltron").</p>
-<h3 id="reduced-resolution-and-coverage-for-burst-mode">Reduced resolution and coverage for burst mode</h3>
-<p>In "burst" mode, the measurement rate can reach up to 20 Hz. The phase space sampling is then reduced, for example by 24 energies and 5 deflections, which allows to increase the time cadence of distribution functions measurements. An algorithm (peak tracking procedure) is used to select the peak of the distribution and to center sampling around this peak.</p>
-<h3 id="different-settings-for-normal-mode-and-burst-mode">Different settings for normal mode and burst mode</h3>
-<p>The different types of sampling are programmed in the form of cyclograms. They define the operation of the instrument over periods of several days. In normal mode, the functions are measured every 4 s with, every 300 s, a short burst mode of 9 s (SnapShot). ‘Long’ burst mode is also acquired every day, consisting of 300 s of continuous sampling at high cadence. The sampling frequency during bursts or snapshots is generally of 4 distributions / s (4 Hz analysis).</p>
+                <h1 id="pas-sampling-organization">PAS sampling organization</h1>
+<p>PAS performs the energy-elevation sweep as shown in Figure 3. PAS keeps the constant energy while sweeping through the elevations. During the sweeping along one elevation bin, PAS accumulates counts in all 11 azimuth bins simultaneously. As soon as the energy-elevation sweep is completed the resulting data set (so-called “sampling”) is a matrix of [11 azimuth, 9 elevations, 96 energies]. Because in most of the cases the real sweep does not cover the full energy-elevation range (it may be like [11 azimuths, 3:7 elevations, 10:73 energies]), we provide also the supporting information about the start/number of the energy and the elevation bins. Since a “peak tracking” runs permanently, the position of the energy x elevation window inside the 9 x 96 frame can change at any time.</p>
+<p><img alt="PAS measurement scheme" src="../img/measurements-scheme.png" />
+<em>Figure 3 PAS measurements scheme.</em></p>
+<h3 id="pas-operation-cyclogram">PAS operation cyclogram</h3>
+<p>Normally the PAS cyclogram is looking as shown in Figure 4. PAS produces one sampling per 4 s. Every 100 s, PAS tries to adapt the energy/elevation window to the solar wind velocity vector. Each 300s, PAS performs fast measurements called “SnapShot”. Here PAS provides “K” number of samplings per second without any gaps. This short cadence takes 9 s. The long fast measurements, called “Burst Mode” is performed by the ground TC. The duration of the “Burst Mode” is 300s.</p>
+<p><img alt="PAS normal mode implementation" src="../img/normal-mode-implementation.png" />
+<em>Figure 4 PAS Normal mode implementation</em></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../about/" class="btn btn-neutral float-left" title="About"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../pas-frames-samplings/" class="btn btn-neutral float-right" title="PAS frames & samplings">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../pas-frames-samplings/" class="btn btn-neutral float-left" title="PAS frames & samplings"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -130,10 +122,8 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../about/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../pas-frames-samplings/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../pas-frames-samplings/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

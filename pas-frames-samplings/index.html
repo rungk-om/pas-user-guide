@@ -61,9 +61,11 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#pas-sampling-organization">PAS sampling organization</a>
-    </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pas-samplings-organisation/">PAS sampling organisation</a>
                 </li>
               </ul>
       </div>
@@ -179,20 +181,12 @@ V_Y^{SRF} & = \cos(El) \cdot \sin (Az),\\
 V_Z^{SRF} & = - \sin(El).
 \end{align}</script>
 </div>
-<h2 id="pas-sampling-organization">PAS sampling organization</h2>
-<p>PAS performs the energy-elevation sweep as shown in Figure 3. PAS keeps the constant energy while sweeping through the elevations. During the sweeping along one elevation bin, PAS accumulates counts in all 11 azimuth bins simultaneously. As soon as the energy-elevation sweep is completed the resulting data set (so-called “sampling”) is a matrix of [11
-azimuth, 9 elevations, 96 energies]. Because in most of the cases the real sweep does not cover the full energy-elevation range (it may be like [11 azimuths, 3:7 elevations, 10:73 energies]), we provide also the supporting information about the start/number of the energy and the elevation bins. Since a “peak tracking” runs permanently, the position of the
-energy x elevation window inside the 9 x 96 frame can change at any time.</p>
-<p><img alt="PAS measurements scheme" src="../img/measurements-scheme.png" />
-<em>Figure 3 PAS measurements scheme</em></p>
-<p>Normally the PAS cyclogram is looking as shown in Figure 4. PAS produces one sampling per 4 s. Every 100 s, PAS tries to adapt the energy/elevation window to the solar wind velocity vector. Each 300s, PAS performs fast measurements called “SnapShot”. Here PAS provides “K” number of samplings per second without any gaps. This short cadence takes 9 s. The long fast measurements, called “Burst Mode” is performed by the ground TC. The duration of the “Burst Mode” is 300s.</p>
-<p><img alt="PAS Normal mode implementation" src="../img/normal-mode-implementation.png" />
-<em>Figure 4 PAS Normal mode implementation</em></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../pas-measurements/" class="btn btn-neutral float-left" title="PAS measurements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pas-samplings-organisation/" class="btn btn-neutral float-right" title="PAS sampling organisation">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -217,6 +211,8 @@ energy x elevation window inside the 9 x 96 frame can change at any time.</p>
     
       <span><a href="../pas-measurements/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../pas-samplings-organisation/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
