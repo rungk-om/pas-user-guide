@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>5. L2 Data Products - PAS L2 Data User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "5. L2 Data Products";
+        var mkdocs_page_input_path = "data-products.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PAS L2 Data User Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pas-measurements/">1. PAS measurements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pas-frames-samplings/">2. PAS frames & samplings</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../known-caveats/">3. Caveats</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../special-notes-vdf/">4. Special notes about PAS VDF interpretation</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">5. L2 Data Products</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#51-3d-velocity-distribution-function-data">5.1 3D velocity distribution function data</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#examples-of-how-to-read-in-a-cdf-file-using-python">Examples of how to read in a CDF file using Python</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PAS L2 Data User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>5. L2 Data Products</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="5-pas-l2-data-products">5. PAS L2 Data Products</h1>
+<p>We produce 3 PAS Level-2 (L2; scientific data level) products in <a href="https://cdf.gsfc.nasa.gov/">CDF</a> (NASA's Common Data Format) as follows.</p>
+<ol>
+<li><strong>3D velocity distribution function</strong><br />
+e.g., <em>solo_L2_swa-pas-vdf_YYYYMMDD_Vxx.cdf</em>  </li>
+<li><strong>1D energy differential flux</strong><br />
+e.g., <em>solo_L2_swa-pas-eflux_YYYYMMDD_Vxx.cdf</em>  </li>
+<li><strong>Ground moments</strong><br />
+e.g., <em>solo_L2_swa-pas-grnd-mom_YYYYMMDD_Vxx.cdf</em>  </li>
+</ol>
+<p>where <em>YYYYMMDD</em> is the year, month, day of the data (e.g., 20220403) and <em>Vxx</em> is the version of the file (e.g., V02).</p>
+<h2 id="51-3d-velocity-distribution-function-data">5.1 3D velocity distribution function data</h2>
+<p>In this section the CDF variables are shown in bold.</p>
+<p>The 3D velocity distribution function CDF file consists of 3D arrays (variable “<strong>vdf</strong>”) of [11 azimuth, 9 elevations, 96 energies] of the ion number density in the phase space expressed in s<span class="arithmatex"><span class="MathJax_Preview">^3</span><script type="math/tex">^3</script></span> m<span class="arithmatex"><span class="MathJax_Preview">^{-6}</span><script type="math/tex">^{-6}</script></span>. Since the instant sampling may cover just a part of the full angular-energy range, the data record contains also the start and number of the elevation bins (“<strong>start_elevation</strong>”, “<strong>nb_elevation</strong>”), the start and number of the azimuth bins (“<strong>start_CEM</strong>”,”<strong>nb_CEM</strong>”), and the start and number of the energy bins (“<strong>start_energy</strong>”,”<strong>nb_energy</strong>”). User shall use only records of the categories (variable “Info”) as follows:</p>
+<ol>
+<li>Normal sampling, one “<strong>vdf</strong>” each 4 sec  </li>
+<li>Snapshot sampling, “<strong>nb_K</strong>” VDFs per second  </li>
+<li>Burst sampling, “<strong>nb_K</strong>” VDFs per second  </li>
+</ol>
+<p>As of the version 2 (V02) of VDF data products, we have the following parameters</p>
+<p><em>Table 5.1 Brief description of parameters in the PAS 3D VDF file</em>  </p>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+<th>Data type</th>
+<th>Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Azimuth</strong></td>
+<td>Azimuth bins</td>
+<td>CDF_REAL4</td>
+<td>[11]</td>
+</tr>
+<tr>
+<td><strong>Elevation</strong></td>
+<td>Elevation bins</td>
+<td>CDF_REAL4</td>
+<td>[9]</td>
+</tr>
+<tr>
+<td><strong>Elevation_correction</strong></td>
+<td>Correction of the elevation</td>
+<td>CDF_REAL4</td>
+<td>[96]</td>
+</tr>
+<tr>
+<td><strong>Energy</strong></td>
+<td>Center of energy bins</td>
+<td>CDF_REAL4</td>
+<td>[96]</td>
+</tr>
+<tr>
+<td><strong>Epoch</strong></td>
+<td>Timestamps</td>
+<td>CDF_TIME_TT2000</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>Full_azimuth</strong></td>
+<td>Full definition azimuth table</td>
+<td>CDF_REAL4</td>
+<td>[11,9,3]</td>
+</tr>
+<tr>
+<td><strong>Full_elevation</strong></td>
+<td>Full definition elevation table</td>
+<td>CDF_REAL4</td>
+<td>[11,9,3]</td>
+</tr>
+<tr>
+<td><strong>Half_interval</strong></td>
+<td>Acquisition half interval</td>
+<td>CDF_REAL4</td>
+<td>[11,9,3]</td>
+</tr>
+<tr>
+<td><strong>Info</strong></td>
+<td>Information related to PAS operation</td>
+<td>CDF_UINT1</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>K</strong></td>
+<td>Number of samplings per second</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>PAS_to_RTN</strong></td>
+<td>Coordinate transformation from PAS to RTN</td>
+<td>CDF_REAL8</td>
+<td>[21314,3,3]</td>
+</tr>
+<tr>
+<td><strong>SCET</strong></td>
+<td>Spacecraft local time</td>
+<td>CDF_REAL8</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>delta_Azimuth</strong></td>
+<td>Width of azimuth bins</td>
+<td>CDF_REAL4</td>
+<td>[11]</td>
+</tr>
+<tr>
+<td><strong>delta_Elevation</strong></td>
+<td>Width of elevation bins</td>
+<td>CDF_REAL4</td>
+<td>[9]</td>
+</tr>
+<tr>
+<td><strong>delta_m_Energy</strong></td>
+<td>Delta minus energy bins</td>
+<td>CDF_REAL4</td>
+<td>[96]</td>
+</tr>
+<tr>
+<td><strong>delta_p_Energy</strong></td>
+<td>Delta plus energy bins</td>
+<td>CDF_REAL4</td>
+<td>[96]</td>
+</tr>
+<tr>
+<td><strong>nb_CEM</strong></td>
+<td>Number of CEM (channeltron)</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>nb_elevation</strong></td>
+<td>Number of elevation</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>nb_energy</strong></td>
+<td>Number of energy</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>quality_factor</strong></td>
+<td>Data quality factor</td>
+<td>CDF_REAL4</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>start_CEM</strong></td>
+<td>Starting number of CEM</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>start_elevation</strong></td>
+<td>Starting number of elevation bin</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>start_energy</strong></td>
+<td>Starting number of energy bin</td>
+<td>CDF_INT2</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>total_count</strong></td>
+<td>Total counts</td>
+<td>CDF_REAL4</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>unrecovered_count</strong></td>
+<td>Unrecovered counts</td>
+<td>CDF_REAL4</td>
+<td>[21314]</td>
+</tr>
+<tr>
+<td><strong>vdf</strong></td>
+<td>Velocity Distribution Function</td>
+<td>CDF_REAL4</td>
+<td>[21314,11,9]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples-of-how-to-read-in-a-cdf-file-using-python">Examples of how to read in a CDF file using Python</h3>
+<p><a href="https://spacepy.github.io/">SpacePy</a> provides a module called <em>pycdf</em> that facilitates reading in a CDF file. Once SpacePy module and <a href="https://spdf.gsfc.nasa.gov/">CDF library</a> have been installed properly, one can use</p>
+<pre><code>from spacepy import pycdf
+
+cdf = pycdf.CDF('solo_L2_swa-pas-vdf_20220403_V02.cdf')
+print(cdf)
+cdf.close()
+</code></pre>
+<p>This will show you the parameters and their dimensions as shown in Table 5.1.</p>
+<p>Then, to read in the parameters, e.g., <strong>epoch</strong></p>
+<pre><code>time = cdf['Epoch'][...]
+print('Time: ',time)
+</code></pre>
+<p>this gives a list of timestamps</p>
+<pre><code>Time:  [datetime.datetime(2022, 4, 3, 0, 0, 2, 398445)
+ datetime.datetime(2022, 4, 3, 0, 0, 6, 398452)
+ datetime.datetime(2022, 4, 3, 0, 0, 10, 398459) ...
+ datetime.datetime(2022, 4, 3, 23, 49, 58, 549214)
+ datetime.datetime(2022, 4, 3, 23, 50, 2, 549221)
+ datetime.datetime(2022, 4, 3, 23, 50, 6, 549228)]
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../special-notes-vdf/" class="btn btn-neutral float-left" title="4. Special notes about PAS VDF interpretation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../special-notes-vdf/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../mathjax-config.js" defer></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
