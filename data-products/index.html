@@ -69,6 +69,10 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#52-1d-differential-energy-flux">5.2 1D Differential Energy Flux</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#53-pas-ground-moments">5.3 PAS Ground Moments</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -305,6 +309,23 @@ print('Time: ',time)
  datetime.datetime(2022, 4, 3, 23, 50, 2, 549221)
  datetime.datetime(2022, 4, 3, 23, 50, 6, 549228)]
 </code></pre>
+<h2 id="52-1d-differential-energy-flux">5.2 1D Differential Energy Flux</h2>
+<p>1D Differential Energy flux CDF file contain original velocity distribution function integrated over elevation and azimuth and converted to the differential energy flux. The value is expressed in cm<span class="arithmatex"><span class="MathJax_Preview">^{-2}</span><script type="math/tex">^{-2}</script></span>  s<span class="arithmatex"><span class="MathJax_Preview">^{-1}</span><script type="math/tex">^{-1}</script></span> eV / eV. Since the instant sampling may cover just a part of the full energy range, the data record contains also the start and number of the energy bins (“<strong>start_energy</strong>”,”<strong>nb_energy</strong>”). User shall use only records of the categories (variable “<strong>Info</strong>”) as follows.</p>
+<ol>
+<li>Normal sampling, one “<strong>eflux</strong>” each 4 sec</li>
+<li>Snapshot sampling, “<strong>nb_K</strong>” efluxs per second</li>
+<li>Burst sampling, “<strong>nb_K</strong>” efluxs per second</li>
+</ol>
+<p>The full description is in Table 5.2 below.</p>
+<h2 id="53-pas-ground-moments">5.3 PAS Ground Moments</h2>
+<p>Ground moments contain the number density, the velocity vector, the pressure tensor and the temperature of the proton peak, extracted from the 3D VDF. User shall use only records of the categories (variable “<strong>Info</strong>”) as follows:</p>
+<ol>
+<li>Normal sampling, one measurement each 4 sec</li>
+<li>Snapshot sampling, “<strong>nb_K</strong>” measurements per second</li>
+<li>Burst sampling, “<strong>nb_K</strong>” measurements per second</li>
+</ol>
+<p>The “<strong>validity</strong>” flag shows the data quality. Do not use the data labeled as “1” since the number density and the pressure could be too low. Use the data labeled “2” with attention because the data could be noisy.</p>
+<p>The full description is in the Table 5.3 below.</p>
               
             </div>
           </div><footer>
